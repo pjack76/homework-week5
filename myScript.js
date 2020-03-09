@@ -4,33 +4,45 @@ var todayDate = moment().format("dddd, MMMM Do YYYY");
 var showClock9am = document.getElementById("9am");
 var showClock10am = document.getElementById("10am");
 
+function liveTime() {
+var clock = moment().format("HH:mm:ss");
+showClock9am.innerHTML = clock;
+
+};
+setInterval(liveTime, 1000);
+liveTime();
+
 
 showDate.innerHTML = todayDate;
-showClock9am.innerHTML = todayDate;
+
 showClock10am.innerHTML = todayDate;
 
 $(document).ready(function(){
   
     var eventArray = [];
-   if (eventArray === null){
-      eventArray = ""}
-        else eventArray = JSON.parse(localStorage.getItem("occasion"));
+   if (localStorage.getItem("occasion") === null){
+       eventArray = []}
+    else eventArray = JSON.parse(localStorage.getItem("occasion"));
+     
     
     $("#saveButton1").click(function(event){
-        event.preventDefault();
-        var comment = $("#plannedEvent1").val();
-        eventArray.push(comment);
-        localStorage.setItem("occasion", JSON.stringify(eventArray));
+        event.preventDefault();        
+        var activity = $("#plannedEvent1").val();
+        if ($("#plannedEvent1").val() === "") {
+            return } 
+        else  eventArray.push(activity);
+            localStorage.setItem("occasion", JSON.stringify(eventArray));
         
     });
-    
+    //$("#plannedEvent1").prop("disabled", true);
+
     $("#saveButton2").click(function(event){
         event.preventDefault();
-        var comment = $("#plannedEvent2").val();
-        eventArray.push(comment);
+        var activity = $("#plannedEvent2").val();
+        eventArray.push(activity);
         localStorage.setItem("occasion", JSON.stringify(eventArray));
         
     });
 });
 
-console.log(localStorage.getItem("occasion"));
+//localStorage.clear();
