@@ -1,147 +1,93 @@
 
-var showDate = document.getElementById("currentDay");
+
 var todayDate = moment().format("dddd, MMMM Do YYYY");
-var showClock= $(".clockDisplay");
-var showClock10am = document.getElementById("10am");
-var blockTime = $(".time-block").data("time");
+var showClock= $("#currentTime");
+var showDate = $("#currentDay");
 
 
-//function liveTime() {
-//var clock = moment().format("HH:mm:ss");
-//showClock.innerHTML = clock;
+showDate.html(todayDate);
 
-//};
-//setInterval(liveTime, 1000);
-//liveTime();
-//showClock10am.innerHTML = todayDate;
+function liveTime() {
+var clock = moment().format("HH:mm:ss");
+showClock.html(clock);
+};
+setInterval(liveTime, 1000);
+liveTime();
+
+
+
+
+
 currentHour = moment().hour();
-//console.log(blockTime);
 
-
-showDate.innerHTML = todayDate;
-
+var blockTime = $(".time-block").data("time");
 var timeElement = $(".time-block");
 for(var i=0; i < timeElement.length; i++){
     var blockTime = parseInt(timeElement.eq(i).data("time"));
     if (blockTime < currentHour) {
-        timeElement.css("background-color", "gray");
+        timeElement.eq(i).css("background-color", "gray");
     }
     else if (blockTime === currentHour) {
-        timeElement.css("background-color", "blue");
+        timeElement.eq(i).css("background-color", "blue");
     }
-    else timeElement.css("background-color", "green");
-
+    else timeElement.eq(i).css("background-color", "green");
+    
 };
 
 
+   
 
 
 
 
 $(document).ready(function(){
-    var storedArray = JSON.parse(localStorage.getItem("occasion"))
-    var eventArray = [];
-   if (localStorage.getItem("occasion") === null){
-       eventArray = []}
-    else eventArray = JSON.parse(localStorage.getItem("occasion"));
-     
-    function checkInput(storedArray) {
-        return activity
-    
-    };
-    
-    $("#saveButton1").click(function(event){
-        event.preventDefault();        
-        var activity = $("#plannedEvent1").val();
-        if ($("#plannedEvent1").val() === "") {
-            return } 
-        else  eventArray.push(activity);
-            localStorage.setItem("occasion", JSON.stringify(eventArray));
+       // var storedArray = JSON.parse(localStorage.getItem("occasion"))
+        var eventArray = [];
+        var eventList = $(".plannedEvent");
+
+    function checkInput(){
+      if (localStorage.getItem("occasion") === null){
+          eventArray = []}
+       else eventArray = JSON.parse(localStorage.getItem("occasion"));};
        
-        $("#plannedEvent1").val(storedArray.find(checkInput));    });
-
-    console.log($("#plannedEvent1").val(storedArray.find(checkInput())));
+        
+        $(".saveButton").click(function(event){
+            event.preventDefault();        
+            checkInput();
+            for (var i=0; i< eventList.length; i++){
+                var activity = eventList.eq(i).val();
+                
+                if (activity === "") {
+                    return } 
+                else  eventArray.push(activity);
+                    localStorage.setItem("occasion", JSON.stringify(eventArray))}})});
+           
+           // $("#plannedEvent1").val(storedArray.find(checkInput));    });
     
-    $("#saveButton2").click(function(event){
-        event.preventDefault();        
-        var activity = $("#plannedEvent2").val();
-        if ($("#plannedEvent2").val() === "") {
-            return } 
-        else  eventArray.push(activity);
-            localStorage.setItem("occasion", JSON.stringify(eventArray));  
-    });
+       // console.log($("#plannedEvent1").val(storedArray.find(checkInput())));
+    
 
-    $("#saveButton3").click(function(event){
-        event.preventDefault();        
-        var activity = $("#plannedEvent3").val();
-        if ($("#plannedEvent3").val() === "") {
-            return } 
-        else  eventArray.push(activity);
-            localStorage.setItem("occasion", JSON.stringify(eventArray));  
-    });
+   // var storedArray = JSON.parse(localStorage.getItem("occasion"))
+   // console.log(storedArray);
+    
+    //for (var i=0; i< storedArray.length; i++){
+       // )};
+    
 
-    $("#saveButton4").click(function(event){
-        event.preventDefault();        
-        var activity = $("#plannedEvent4").val();
-        if ($("#plannedEvent4").val() === "") {
-            return } 
-        else  eventArray.push(activity);
-            localStorage.setItem("occasion", JSON.stringify(eventArray));  
-    });
-
-    $("#saveButton5").click(function(event){
-        event.preventDefault();        
-        var activity = $("#plannedEvent5").val();
-        if ($("#plannedEvent5").val() === "") {
-            return } 
-        else  eventArray.push(activity);
-            localStorage.setItem("occasion", JSON.stringify(eventArray));  
-    });
-
-    $("#saveButton6").click(function(event){
-        event.preventDefault();        
-        var activity = $("#plannedEvent6").val();
-        if ($("#plannedEvent6").val() === "") {
-            return } 
-        else  eventArray.push(activity);
-            localStorage.setItem("occasion", JSON.stringify(eventArray));  
-    });
-
-    $("#saveButton7").click(function(event){
-        event.preventDefault();        
-        var activity = $("#plannedEvent7").val();
-        if ($("#plannedEvent7").val() === "") {
-            return } 
-        else  eventArray.push(activity);
-            localStorage.setItem("occasion", JSON.stringify(eventArray));  
-    });
-
-    $("#saveButton8").click(function(event){
-        event.preventDefault();        
-        var activity = $("#plannedEvent8").val();
-        if ($("#plannedEvent8").val() === "") {
-            return } 
-        else  eventArray.push(activity);
-            localStorage.setItem("occasion", JSON.stringify(eventArray));  
-    });
-
-    $("#saveButton9").click(function(event){
-        event.preventDefault();        
-        var activity = $("#plannedEvent9").val();
-        if ($("#plannedEvent9").val() === "") {
-            return } 
-        else  eventArray.push(activity);
-            localStorage.setItem("occasion", JSON.stringify(eventArray));  
-    });
+    
+    
+    
+     
+    //console.log(storedArray.length);*/
+      
+    //console.log($("#plannedEvent1").val(storedArray.find(checkInput())));
+    
+   
     //$("#plannedEvent1").prop("disabled", true);
 
-    $("#saveButton2").click(function(event){
-       event.preventDefault();
-        var activity = $("#plannedEvent2").val();
-        eventArray.push(activity);
-        localStorage.setItem("occasion", JSON.stringify(eventArray));
+    
         
-   });
-});
+   
 
-//localStorage.clear();
+
+//localStorage.clear();*/
